@@ -1,10 +1,3 @@
-//Js runs from top to bottom
-//creat is associated with post
-//read is get
-//update is put (Patch)
-//delete is delete
-
-
 const strWeatherAPIURL = 'https://api.open-meteo.com/v1/forecast?latitude=36.1693184&longitude=-85.508096&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&hourly=temperature_2m,relative_humidity_2m,precipitation,precipitation_probability,weather_code,cloud_cover,soil_temperature_0cm,wind_speed_10m,wind_speed_80m,wind_direction_10m,wind_direction_80m,wind_gusts_10m,soil_moisture_0_to_1cm,visibility,uv_index,is_day&current=temperature_2m,relative_humidity_2m,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,weather_code,cloud_cover&timezone=America%2FChicago&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch'
 
 getWeatherData();
@@ -18,22 +11,216 @@ async function getWeatherData(){
         }
     )
 
-    if(!objResponse.ok){
+    if (!objResponse.ok){
         alert('Error getting data')
     }
     else{
         const objData = await objResponse.json()
         document.querySelector('#lblCurrentTemp').innerHTML = objData.current.temperature_2m + '°'
+        //minimum and maximum temperature for the day
         let strMaxTemp = objData.daily.temperature_2m_max[0]
         let strMinTemp = objData.daily.temperature_2m_min[0]
         console.log(strMaxTemp)
         document.querySelector('#lblLow').innerHTML = strMinTemp + '°'
         document.querySelector('#lblHigh').innerHTML = strMaxTemp + '°'
         let strCurrentWeatherCode = objData.current.weather_code
+        let strDailyWeatherCode = objData.daily.weather_code
         // || pipe or
         /* if (strCurrentWeatherCode == 0 || strCurrentWeatherCode < 4){ //advantage easy to read
 
         } */
+
+         //weekly weather forcasts (max)
+        let Day1Max = objData.daily.temperature_2m_max[0]
+        console.log(Day1Max)
+        document.querySelector('#monMax').innerHTML = Day1Max + '°'
+        let Day2Max = objData.daily.temperature_2m_max[1]
+        document.querySelector('#tueMax').innerHTML = Day2Max + '°'
+        let Day3Max = objData.daily.temperature_2m_max[2]
+        document.querySelector('#wedMax').innerHTML = Day3Max + '°'
+        let Day4Max = objData.daily.temperature_2m_max[3]
+        document.querySelector('#thurMax').innerHTML = Day4Max + '°'
+        let Day5Max = objData.daily.temperature_2m_max[4]
+        document.querySelector('#friMax').innerHTML = Day5Max + '°'
+        let Day6Max = objData.daily.temperature_2m_max[5]
+        document.querySelector('#satMax').innerHTML = Day6Max + '°'
+        let Day7Max = objData.daily.temperature_2m_max[6]
+        document.querySelector('#sunMax').innerHTML = Day7Max + '°'
+
+         //weekly weather forcasts (min)
+        let Day1Min = objData.daily.temperature_2m_min[0]
+        console.log(Day1Min)
+        document.querySelector('#monMin').innerHTML = Day1Min + '°'
+        let Day2Min = objData.daily.temperature_2m_min[1]
+        document.querySelector('#tueMin').innerHTML = Day2Min + '°'
+        let Day3Min = objData.daily.temperature_2m_min[2]
+        document.querySelector('#wedMin').innerHTML = Day3Min + '°'
+        let Day4Min = objData.daily.temperature_2m_min[3]
+        document.querySelector('#thurMin').innerHTML = Day4Min + '°'
+        let Day5Min = objData.daily.temperature_2m_min[4]
+        document.querySelector('#friMin').innerHTML = Day5Min + '°'
+        let Day6Min = objData.daily.temperature_2m_min[5]
+        document.querySelector('#satMin').innerHTML = Day6Min + '°'
+        let Day7Min = objData.daily.temperature_2m_min[6]
+        document.querySelector('#sunMin').innerHTML = Day7Min + '°'
+
+        //weekly weather icons
+        let Day1Icon = strDailyWeatherCode[0]
+        console.log(Day1Icon)
+        document.querySelector('#monIcon').innerHTML = Day1Icon
+        let Day2Icon = strDailyWeatherCode[1]
+        document.querySelector('#tueIcon').innerHTML = Day2Icon 
+        let Day3Icon = strDailyWeatherCode[2]
+        document.querySelector('#wedIcon').innerHTML = Day3Icon
+        let Day4Icon = strDailyWeatherCode[3]
+        document.querySelector('#thurIcon').innerHTML = Day4Icon
+        let Day5Icon = strDailyWeatherCode[4]
+        document.querySelector('#friIcon').innerHTML = Day5Icon
+        let Day6Icon = strDailyWeatherCode[5]
+        document.querySelector('#satIcon').innerHTML = Day6Icon 
+        let Day7Icon = strDailyWeatherCode[6]
+        document.querySelector('#sunIcon').innerHTML = Day7Icon 
+        //icon tests (Monday)
+        if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#monIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
+        }
+        if([45,48].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#monIcon').innerHTML = '<i class="bi bi-cloud-fog"></i>'
+        }
+        if([51,53,55,56,57].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#monIcon').innerHTML = '<i class="bi bi-cloud-drizzle"></i>'
+        }
+        if([61,63,65,66,67,80,81,82].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#monIcon').innerHTML = '<i class="bi bi-cloud-rain"></i>'
+        }
+        if([71,73,75,77,85,86].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#monIcon').innerHTML = '<i class="bi bi-cloud-snow"></i>'
+        }
+        if([95,96,99].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#monIcon').innerHTML = '<i class="bi bi-cloud-lighting-rain"></i>'
+        }
+
+        //icon tests (Tuesday)
+        if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#tueIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
+        }
+        if([45,48].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#tueIcon').innerHTML = '<i class="bi bi-cloud-fog"></i>'
+        }
+        if([51,53,55,56,57].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#tueIcon').innerHTML = '<i class="bi bi-cloud-drizzle"></i>'
+        }
+        if([61,63,65,66,67,80,81,82].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#tueIcon').innerHTML = '<i class="bi bi-cloud-rain"></i>'
+        }
+        if([71,73,75,77,85,86].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#tueIcon').innerHTML = '<i class="bi bi-cloud-snow"></i>'
+        }
+        if([95,96,99].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#tueIcon').innerHTML = '<i class="bi bi-cloud-lighting-rain"></i>'
+        }
+
+        //icon tests (Wednesday)
+        if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#wedIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
+        }
+        if([45,48].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#wedIcon').innerHTML = '<i class="bi bi-cloud-fog"></i>'
+        }
+        if([51,53,55,56,57].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#wedIcon').innerHTML = '<i class="bi bi-cloud-drizzle"></i>'
+        }
+        if([61,63,65,66,67,80,81,82].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#wedIcon').innerHTML = '<i class="bi bi-cloud-rain"></i>'
+        }
+        if([71,73,75,77,85,86].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#wedIcon').innerHTML = '<i class="bi bi-cloud-snow"></i>'
+        }
+        if([95,96,99].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#wedIcon').innerHTML = '<i class="bi bi-cloud-lighting-rain"></i>'
+        }
+
+        //icon tests (Thusday)
+        if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#thurIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
+        }
+        if([45,48].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#thurIcon').innerHTML = '<i class="bi bi-cloud-fog"></i>'
+        }
+        if([51,53,55,56,57].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#thurIcon').innerHTML = '<i class="bi bi-cloud-drizzle"></i>'
+        }
+        if([61,63,65,66,67,80,81,82].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#thurIcon').innerHTML = '<i class="bi bi-cloud-rain"></i>'
+        }
+        if([71,73,75,77,85,86].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#thurIcon').innerHTML = '<i class="bi bi-cloud-snow"></i>'
+        }
+        if([95,96,99].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#thurIcon').innerHTML = '<i class="bi bi-cloud-lighting-rain"></i>'
+        }
+
+        //icon tests (Friday)
+        if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#friIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
+        }
+        if([45,48].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#friIcon').innerHTML = '<i class="bi bi-cloud-fog"></i>'
+        }
+        if([51,53,55,56,57].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#friIcon').innerHTML = '<i class="bi bi-cloud-drizzle"></i>'
+        }
+        if([61,63,65,66,67,80,81,82].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#friIcon').innerHTML = '<i class="bi bi-cloud-rain"></i>'
+        }
+        if([71,73,75,77,85,86].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#friIcon').innerHTML = '<i class="bi bi-cloud-snow"></i>'
+        }
+        if([95,96,99].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#friIcon').innerHTML = '<i class="bi bi-cloud-lighting-rain"></i>'
+        }
+
+        //icon tests (Saturday)
+        if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#satIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
+        }
+        if([45,48].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#satIcon').innerHTML = '<i class="bi bi-cloud-fog"></i>'
+        }
+        if([51,53,55,56,57].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#satIcon').innerHTML = '<i class="bi bi-cloud-drizzle"></i>'
+        }
+        if([61,63,65,66,67,80,81,82].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#satIcon').innerHTML = '<i class="bi bi-cloud-rain"></i>'
+        }
+        if([71,73,75,77,85,86].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#satIcon').innerHTML = '<i class="bi bi-cloud-snow"></i>'
+        }
+        if([95,96,99].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#satIcon').innerHTML = '<i class="bi bi-cloud-lighting-rain"></i>'
+        }
+
+        //icon tests (Sunday)
+        if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#sunIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
+        }
+        if([45,48].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#sunIcon').innerHTML = '<i class="bi bi-cloud-fog"></i>'
+        }
+        if([51,53,55,56,57].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#sunIcon').innerHTML = '<i class="bi bi-cloud-drizzle"></i>'
+        }
+        if([61,63,65,66,67,80,81,82].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#sunIcon').innerHTML = '<i class="bi bi-cloud-rain"></i>'
+        }
+        if([71,73,75,77,85,86].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#sunIcon').innerHTML = '<i class="bi bi-cloud-snow"></i>'
+        }
+        if([95,96,99].includes(strCurrentWeatherCode)){ // more flexible
+            document.querySelector('#sunIcon').innerHTML = '<i class="bi bi-cloud-lighting-rain"></i>'
+        }
+
+        //icon tests (Label)
         if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
             document.querySelector('#lblIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
         }
@@ -52,6 +239,7 @@ async function getWeatherData(){
         if([95,96,99].includes(strCurrentWeatherCode)){ // more flexible
             document.querySelector('#lblIcon').innerHTML = '<i class="bi bi-cloud-lighting-rain"></i>'
         }
-        
+
+
     }
 }
