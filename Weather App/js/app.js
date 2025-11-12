@@ -1,5 +1,6 @@
 const strWeatherAPIURL = 'https://api.open-meteo.com/v1/forecast?latitude=36.1693184&longitude=-85.508096&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&hourly=temperature_2m,relative_humidity_2m,precipitation,precipitation_probability,weather_code,cloud_cover,soil_temperature_0cm,wind_speed_10m,wind_speed_80m,wind_direction_10m,wind_direction_80m,wind_gusts_10m,soil_moisture_0_to_1cm,visibility,uv_index,is_day&current=temperature_2m,relative_humidity_2m,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,weather_code,cloud_cover&timezone=America%2FChicago&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch'
 
+//Gets the Data from API
 getWeatherData();
 async function getWeatherData(){
     const objResponse = await fetch(strWeatherAPIURL,
@@ -11,26 +12,33 @@ async function getWeatherData(){
         }
     )
 
+    //Alerts User to fail in data gathering
     if (!objResponse.ok){
         alert('Error getting data')
     }
+
+    //Preforms on Error free data gathering
     else{
+        //Stores Data from API
         const objData = await objResponse.json()
+        
+        //grabs Current Temp and sends to html
         document.querySelector('#lblCurrentTemp').innerHTML = objData.current.temperature_2m + '°'
-        //minimum and maximum temperature for the day
+        
+        //grabs minimum and maximum temperature for the day
         let strMaxTemp = objData.daily.temperature_2m_max[0]
         let strMinTemp = objData.daily.temperature_2m_min[0]
-        console.log(strMaxTemp)
+        console.log(strMaxTemp) //Tests
+        //Sends to Html
         document.querySelector('#lblLow').innerHTML = strMinTemp + '°'
         document.querySelector('#lblHigh').innerHTML = strMaxTemp + '°'
+
+        //Assigns a weather code for the present
         let strCurrentWeatherCode = objData.current.weather_code
         let strDailyWeatherCode = objData.daily.weather_code
-        // || pipe or
-        /* if (strCurrentWeatherCode == 0 || strCurrentWeatherCode < 4){ //advantage easy to read
+        
 
-        } */
-
-         //weekly weather forcasts (max)
+        //Weekly weather forcasts (max)
         let Day1Max = objData.daily.temperature_2m_max[0]
         console.log(Day1Max)
         document.querySelector('#monMax').innerHTML = Day1Max + '°'
@@ -47,7 +55,7 @@ async function getWeatherData(){
         let Day7Max = objData.daily.temperature_2m_max[6]
         document.querySelector('#sunMax').innerHTML = Day7Max + '°'
 
-         //weekly weather forcasts (min)
+        //weekly weather forcasts (min)
         let Day1Min = objData.daily.temperature_2m_min[0]
         console.log(Day1Min)
         document.querySelector('#monMin').innerHTML = Day1Min + '°'
@@ -79,7 +87,8 @@ async function getWeatherData(){
         let Day6Icon = strDailyWeatherCode[5]
         document.querySelector('#satIcon').innerHTML = Day6Icon 
         let Day7Icon = strDailyWeatherCode[6]
-        document.querySelector('#sunIcon').innerHTML = Day7Icon 
+        document.querySelector('#sunIcon').innerHTML = Day7Icon
+
         //icon tests (Monday)
         if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
             document.querySelector('#monIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
@@ -223,6 +232,7 @@ async function getWeatherData(){
         //icon tests (Label)
         if([0,1,2,3].includes(strCurrentWeatherCode)){ // more flexible
             document.querySelector('#lblIcon').innerHTML = '<i class="bi bi-brightness-high"></i>'
+            //Here I want to include a way to switch photos
         }
         if([45,48].includes(strCurrentWeatherCode)){ // more flexible
             document.querySelector('#lblIcon').innerHTML = '<i class="bi bi-cloud-fog"></i>'
