@@ -10,12 +10,32 @@
 <body class="bg-dark">
     <!--START OF CARD BODY-->
     <div class=" d-flex justify-content-center">
-        <div class="card col-6" style="background-color: #556B2F;">
+        <div class="card col-md-6 " style="background-color: #556B2F;">
             <div class="card-body">
+                
+                <div class="container text-center" >
+                <h1 style="font-size: 6vw;">The Fore-Cast</h1>
+                </div>
+
+                <div class="container text-center" >
+                    <div class="btn-group w-100 ">
+                        <button class="btn btn-success dropdown-toggle w-100 text-wrap" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                           <span style="font-size: 3vw;">Links To Local Golf Courses</span>
+                        </button>
+                        <ul class="dropdown-menu" id="Dropdown">
+                            <li><a class="dropdown-item" href="https://www.ttugoldeneaglegolfclub.com/">TN Tech Golden Eagles</a></li>
+                            <li><a class="dropdown-item" href="https://www.whiteplainsgolfcourse.com/">White Plains</a></li>
+                            <li><a class="dropdown-item" href="https://belleacresgolf.com/">Belle Acres</a></li>
+                        </ul>
+                    </div>
+                    <br><br>
+                </div>
 
                 <!--Image Section-->
                 <div class="position-relative">
-                    <img id='CurrentWeatherImageId' src="imgs/ivana-cajina-dQejX2ucPBs-unsplash.jpg" class="card-img" alt="photo of the sun">
+                    <div class="container col-12 overflow-hidden" style="height:sm-25vh lg-75vh">
+                        <img id="CurrentWeatherImageId" src="imgs/morning-putt.webp" class="card-img" alt="photo of the sun">
+                    </div>
                     <div class="card-img-overlay">
                         <!--OVERLAY CONTAINER-->
                         <div class="container position-absolute top-50 start-50 translate-middle col-5 bg-dark rounded ">
@@ -34,114 +54,110 @@
                     </div>
                 </div>
  
+                <br>
 
 
 
-
-                <!--TO DO -> Fix sun line up wed is skewed-->
                 <div class="container text-center">
-                    <h2><u>Weekly Fore-Cast</u></h2>
+                    <h2><u style="font-size: 4vw;">Weekly Fore-Cast</u></h2>
                 </div>
+
                 <div>
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col">
-                                <b>Monday</b>
+                    <div class="container rounded border border-success" style="background-color: #828C51">
+                        <br>
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="text-nowrap" style="font-size: 2.3vw;"><b>Today</b></p>
+                                </div>
+                                <div class="col-4">
+                                    <span id="todayIcon" class="mt-5 text-grey rounded" style="font-size: 3vw;"></span>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-center text-grey" style="font-size: 2vw;"><span id="todayMin"></span>/<span id="todayMax"></span>
+                                </div>
                             </div>
-                            <div class="col">
-                                <span id="monIcon" class="mt-5 text-grey rounded"></span>
+                        </div>    
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col-4 ">
+                                    <p class="text-nowrap" style="font-size: 2.3vw;"><b id="day2"></b></p>
+                                </div>
+                                <div class="col-4">
+                                    <span id="day2Icon" class="mt-5 text-grey rounded" style="font-size: 3vw;"></span>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-center text-grey"style="font-size: 2vw;"><span id="day2Min"></span>/<span id="day2Max"></span>
+                                </div>
                             </div>
-                            <div class="col">
-                                <p class="text-center text-grey"><span id="monMax"></span>/<span id="monMin"></span>
+                        </div>    
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="text-nowrap" style="font-size: 2.3vw;"><b id="day3"></b></p>
+                                </div>
+                                <div class="col-4">
+                                    <span id="day3Icon" class="mt-5 text-grey rounded" style="font-size: 3vw;"></span>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-center text-grey"style="font-size: 2vw;"><span id="day3Min"></span>/<span id="day3Max"></span>
+                                </div>
                             </div>
-                        </div>
-                    </div>    
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col">
-                                <b>Tuesday</b>
+                        </div>    
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="text-nowrap" style="font-size: 2.3vw;"><b id="day4"></b></p>
+                                </div>
+                                <div class="col-4">
+                                    <span id="day4Icon" class="mt-5 text-grey rounded" style="font-size: 3vw;"></span>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-center text-grey"style="font-size: 2vw;"><span id="day4Min"></span>/<span id="day4Max"></span>
+                                </div>
                             </div>
-                            <div class="col">
-                                <span id="tueIcon" class="mt-5 text-grey rounded"></span>
+                        </div>    
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="text-nowrap" style="font-size: 2.3vw;"><b id="day5"></b></p>
+                                </div>
+                                <div class="col-4">
+                                    <span id="day5Icon" class="mt-5 text-grey rounded" style="font-size: 3vw;"></span>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-center text-grey"style="font-size: 2vw;"><span id="day5Min"></span>/<span id="day5Max"></span>
+                                </div>
                             </div>
-                            <div class="col">
-                                <p class="text-center text-grey"><span id="tueMax"></span>/<span id="tueMin"></span>
+                        </div>    
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="text-nowrap" style="font-size: 2.3vw;"><b id="day6"></b></p>
+                                </div>
+                                <div class="col-4">
+                                    <span id="day6Icon" class="mt-5 text-grey rounded" style="font-size: 3vw;"></span>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-center text-grey"style="font-size: 2vw;"><span id="day6Min"></span>/<span id="day6Max"></span>
+                                </div>
                             </div>
-                        </div>
-                    </div>    
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col">
-                                <b>Wednesday</b>
-                            </div>
-                            <div class="col">
-                                <span id="wedIcon" class="mt-5 text-grey rounded"></span>
-                            </div>
-                            <div class="col">
-                                <p class="text-center text-grey"><span id="wedMax"></span>/<span id="wedMin"></span>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col">
-                                <b>Thursday</b>
-                            </div>
-                            <div class="col">
-                                <span id="thurIcon" class="mt-5 text-grey rounded"></span>
-                            </div>
-                            <div class="col">
-                                <p class="text-center text-grey"><span id="thurMax"></span>/<span id="thurMin"></span>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col">
-                                <b>Friday</b>
-                            </div>
-                            <div class="col">
-                                <span id="friIcon" class="mt-5 text-grey rounded"></span>
-                            </div>
-                            <div class="col">
-                                <p class="text-center text-grey"><span id="friMax">54</span>/<span id="friMin">54</span>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col">
-                                <b>Saturday</b>
-                            </div>
-                            <div class="col">
-                                <span id="satIcon" class="mt-5 text-grey rounded">snowy</span>
-                            </div>
-                            <div class="col">
-                                <p class="text-center text-grey"><span id="satMax">48</span>/<span id="satMin">48</span>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col">
-                                <b>Sunday</b>
-                            </div>
-                            <div class="col">
-                                <span id="sunIcon" class="mt-5 text-grey rounded">sunny</span>
-                            </div>
-                            <div class="col">
-                                <p class="text-center text-grey"><span id="sunMax">69</span>/<span id="sunMin">69</span>
+                        </div>    
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="text-nowrap" style="font-size: 2.3vw;"><b id="day7"></b></p>
+                                </div>
+                                <div class="col-4">
+                                    <span id="day7Icon" class="mt-5 text-grey rounded" style="font-size: 3vw;"></span>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-center text-grey"style="font-size: 2vw;"><span id="day7Min"></span>/<span id="day7Max"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--BEGINNING OF COURSE CHOICES-->
-                    <div class="container text-center">     
-                        <h3> <u>Favorite Courses</u> </h3>
-                        <!--have to figure out how to swap favorite golf course with another-->
-                        <a  class="btn btn-primary" href="https://www.ttugoldeneaglegolfclub.com/" style="font-size:20px" id="lblFavoriteCourse">Golden Eagle Golf Club</a>
-                    </div>  
-                </div>
+                </div>  
             </div>
         </div>
     </div>
